@@ -26,23 +26,18 @@ type BranchData =
     if this.Taken > 0 then $"{value},{this.Taken}" else $"{value},-"
 
 /// Provides the coverage data of branches.
-type BranchCoverage =
-  {
-    /// The coverage data.
-    Data: BranchData list
+type BranchCoverage() =
 
-    /// The number of branches found.
-    Found: int
+  /// The coverage data.
+  member val Data = ResizeArray<BranchData>() with get, set
 
-    /// The number of branches hit.
-    Hit: int
-  }
+  /// The number of branches found.
+  member val Found = 0 with get, set
 
-  /// Creates a new instance with default values.
-  static member Default =
-    { Data = []; Found = 0; Hit = 0 }
+  /// The number of branches hit.
+  member val Hit = 0 with get, set
 
   /// Returns a string representation of this object.
   override this.ToString() =
-    let data = this.Data |> List.map (fun value -> string value)
+    let data = this.Data |> Seq.map (fun value -> string value) |> List.ofSeq
     data @ [$"{Tokens.BranchesFound}:{this.Found}"; $"{Tokens.BranchesHit}:{this.Hit}"] |> String.concat "\n"

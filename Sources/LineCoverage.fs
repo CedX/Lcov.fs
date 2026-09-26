@@ -23,23 +23,18 @@ type LineData =
     if this.Checksum.Length > 0 then $"{value},{this.Checksum}" else value
 
 /// Provides the coverage data of lines.
-type LineCoverage =
-  {
-    /// The coverage data.
-    Data: LineData list
+type LineCoverage() =
 
-    /// The number of lines found.
-    Found: int
+  /// The coverage data.
+  member val Data = ResizeArray<LineData>() with get, set
 
-    /// The number of lines hit.
-    Hit: int
-  }
+  /// The number of lines found.
+  member val Found = 0 with get, set
 
-  /// Creates a new instance with default values.
-  static member Default =
-    { Data = []; Found = 0; Hit = 0 }
+  /// The number of lines hit.
+  member val Hit = 0 with get, set
 
   /// Returns a string representation of this object.
   override this.ToString() =
-    let data = this.Data |> List.map (fun value -> string value)
+    let data = this.Data |> Seq.map (fun value -> string value) |> List.ofSeq
     data @ [$"{Tokens.LinesFound}:{this.Found}"; $"{Tokens.LinesHit}:{this.Hit}"] |> String.concat "\n"

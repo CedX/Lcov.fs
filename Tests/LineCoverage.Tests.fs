@@ -17,6 +17,6 @@ type LineCoverageTests() =
 
   [<TestMethod>]
   member _.TestToString() =
-    let data = { Checksum = ""; ExecutionCount = 3; LineNumber = 127 }
-    Assert.AreEqual("LF:0\nLH:0", string LineCoverage.Default)
-    Assert.AreEqual($"{data}\nLF:23\nLH:11", string { LineCoverage.Data = [data]; Found = 23; Hit = 11 })
+    let data = ResizeArray [{ Checksum = ""; ExecutionCount = 3; LineNumber = 127 }]
+    Assert.AreEqual("LF:0\nLH:0", string (LineCoverage()))
+    Assert.AreEqual($"{data[0]}\nLF:23\nLH:11", string (LineCoverage(Data = data, Found = 23, Hit = 11)))

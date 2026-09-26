@@ -17,6 +17,6 @@ type BranchCoverageTests() =
 
   [<TestMethod>]
   member _.TestToString() =
-    let data = { BlockNumber = 3; BranchNumber = 2; LineNumber = 127; Taken = 1 }
-    Assert.AreEqual("BRF:0\nBRH:0", string BranchCoverage.Default)
-    Assert.AreEqual($"{data}\nBRF:23\nBRH:11", string { BranchCoverage.Data = [data]; Found = 23; Hit = 11 })
+    let data = ResizeArray [{ BlockNumber = 3; BranchNumber = 2; LineNumber = 127; Taken = 1 }]
+    Assert.AreEqual("BRF:0\nBRH:0", string (BranchCoverage()))
+    Assert.AreEqual($"{data[0]}\nBRF:23\nBRH:11", string (BranchCoverage(Data = data, Found = 23, Hit = 11)))

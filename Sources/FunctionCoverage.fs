@@ -22,23 +22,18 @@ type FunctionData =
     [$"{Tokens.FunctionName}:{this.LineNumber},{this.FunctionName}"; $"{Tokens.FunctionData}:{this.ExecutionCount},{this.FunctionName}"] |> String.concat "\n"
 
 /// Provides the coverage data of functions.
-type FunctionCoverage =
-  {
-    /// The coverage data.
-    Data: FunctionData list
+type FunctionCoverage() =
 
-    /// The number of functions found.
-    Found: int
+  /// The coverage data.
+  member val Data = ResizeArray<FunctionData>() with get, set
 
-    /// The number of functions hit.
-    Hit: int
-  }
+  /// The number of functions found.
+  member val Found = 0 with get, set
 
-  /// Creates a new instance with default values.
-  static member Default =
-    { Data = []; Found = 0; Hit = 0 }
+  /// The number of functions hit.
+  member val Hit = 0 with get, set
 
   /// Returns a string representation of this object.
   override this.ToString() =
-    let data = this.Data |> List.map (fun value -> string value)
+    let data = this.Data |> Seq.map (fun value -> string value) |> List.ofSeq
     data @ [$"{Tokens.FunctionsFound}:{this.Found}"; $"{Tokens.FunctionsHit}:{this.Hit}"] |> String.concat "\n"

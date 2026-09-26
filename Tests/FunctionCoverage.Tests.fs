@@ -17,6 +17,6 @@ type FunctionCoverageTests() =
 
   [<TestMethod>]
   member _.TestToString() =
-    let data = { ExecutionCount = 3; FunctionName = "main"; LineNumber = 127 }
-    Assert.AreEqual("FNF:0\nFNH:0", string FunctionCoverage.Default)
-    Assert.AreEqual("FN:127,main\nFNDA:3,main\nFNF:23\nFNH:11", string { FunctionCoverage.Data = [data]; Found = 23; Hit = 11 })
+    let data = ResizeArray [{ ExecutionCount = 3; FunctionName = "main"; LineNumber = 127 }]
+    Assert.AreEqual("FNF:0\nFNH:0", string (FunctionCoverage()))
+    Assert.AreEqual("FN:127,main\nFNDA:3,main\nFNF:23\nFNH:11", string (FunctionCoverage(Data = data, Found = 23, Hit = 11)))
