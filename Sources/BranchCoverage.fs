@@ -16,6 +16,10 @@ type BranchData =
     Taken: int
   }
 
+  /// Creates a new instance with default values.
+  static member Default =
+    { BlockNumber = 0; BranchNumber = 0; LineNumber = 0; Taken = 0 }
+
   /// Returns a string representation of this object.
   override this.ToString() =
     let value = $"{Tokens.BranchData}:{this.LineNumber},{this.BlockNumber},{this.BranchNumber}"
@@ -33,6 +37,10 @@ type BranchCoverage =
     /// The number of branches hit.
     Hit: int
   }
+
+  /// Creates a new instance with default values.
+  static member Default =
+    { Data = []; Found = 0; Hit = 0 }
 
   /// Returns a string representation of this object.
   override this.ToString() =

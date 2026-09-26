@@ -13,6 +13,10 @@ type LineData =
     LineNumber: int
   }
 
+  /// Creates a new instance with default values.
+  static member Default =
+    { Checksum = ""; ExecutionCount = 0; LineNumber = 0 }
+
   /// Returns a string representation of this object.
   override this.ToString() =
     let value = $"{Tokens.LineData}:{this.LineNumber},{this.ExecutionCount}";
@@ -30,6 +34,10 @@ type LineCoverage =
     /// The number of lines hit.
     Hit: int
   }
+
+  /// Creates a new instance with default values.
+  static member Default =
+    { Data = []; Found = 0; Hit = 0 }
 
   /// Returns a string representation of this object.
   override this.ToString() =

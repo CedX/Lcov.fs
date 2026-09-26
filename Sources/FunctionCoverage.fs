@@ -13,6 +13,10 @@ type FunctionData =
     LineNumber: int
   }
 
+  /// Creates a new instance with default values.
+  static member Default =
+    { ExecutionCount = 0; FunctionName = ""; LineNumber = 0 }
+
   /// Returns a string representation of this object.
   override this.ToString() =
     [$"{Tokens.FunctionName}:{this.LineNumber},{this.FunctionName}"; $"{Tokens.FunctionData}:{this.ExecutionCount},{this.FunctionName}"] |> String.concat "\n"
@@ -29,6 +33,10 @@ type FunctionCoverage =
     /// The number of functions hit.
     Hit: int
   }
+
+  /// Creates a new instance with default values.
+  static member Default =
+    { Data = []; Found = 0; Hit = 0 }
 
   /// Returns a string representation of this object.
   override this.ToString() =

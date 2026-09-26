@@ -37,10 +37,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<!-- <Compile Include="Author.fs" />
-		<Compile Include="Blog.fs" />
-		<Compile Include="CheckResult.fs" />
-		<Compile Include="Comment.fs" />
-		<Compile Include="Client.fs" /> -->
+		<Compile Include="Tokens.fs" />
+		<Compile Include="BranchCoverage.fs" />
+		<Compile Include="FunctionCoverage.fs" />
+		<Compile Include="LineCoverage.fs" />
 	</ItemGroup>
 </Project>

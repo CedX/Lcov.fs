@@ -26,5 +26,8 @@
 
 	<ItemGroup>
 		<Compile Include="AssemblyInfo.fs" />
+		<Compile Include="BranchCoverage.Tests.fs" />
+		<Compile Include="FunctionCoverage.Tests.fs" />
+		<Compile Include="LineCoverage.Tests.fs" />
 	</ItemGroup>
 </Project>
