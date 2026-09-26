@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<Company>Cedric-Belin.fr</Company>
+		<Copyright>© Cédric Belin</Copyright>
+		<Description>Parse and format to LCOV your code coverage reports.</Description>
+		<Product>LCOV Reports for F#</Product>
+		<Version>5.0.1</Version>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AssemblyName>Belin.Lcov.Tests</AssemblyName>
+		<BaseOutputPath>obj</BaseOutputPath>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<OutDir>../Binaries</OutDir>
+		<RootNamespace>Belin.Lcov</RootNamespace>
+		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+		<TargetFramework>net10.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="MSTest" Version="4.*" />
+		<ProjectReference Include="../Sources/Lcov.fsproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Include="AssemblyInfo.fs" />
+	</ItemGroup>
+</Project>

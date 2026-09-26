@@ -1,0 +1,6 @@
+<Solution>
+	<Project Path="Sources/Lcov.fsproj" />
+	<Project Path="Tests/Lcov.Tests.fsproj">
+		<Build Solution="Release|*" Project="false" />
+	</Project>
+</Solution>
