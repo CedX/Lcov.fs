@@ -29,5 +29,6 @@
 		<Compile Include="BranchCoverage.Tests.fs" />
 		<Compile Include="FunctionCoverage.Tests.fs" />
 		<Compile Include="LineCoverage.Tests.fs" />
+		<Compile Include="SourceFile.Tests.fs" />
 	</ItemGroup>
 </Project>

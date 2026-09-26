@@ -1,13 +1,12 @@
 namespace Belin.Lcov
 
 open Microsoft.VisualStudio.TestTools.UnitTesting
-open System.ComponentModel
 
 /// Tests the features of the `BranchData` class.
 [<TestClass>]
 type BranchDataTests() =
 
-  [<TestMethod; DisplayName("ToString")>]
+  [<TestMethod>]
   member _.TestToString() =
     Assert.AreEqual("BRDA:0,0,0,-", string BranchData.Default)
     Assert.AreEqual("BRDA:127,3,2,1", string { BlockNumber = 3; BranchNumber = 2; LineNumber = 127; Taken = 1 })
@@ -16,7 +15,7 @@ type BranchDataTests() =
 [<TestClass>]
 type BranchCoverageTests() =
 
-  [<TestMethod; DisplayName("ToString")>]
+  [<TestMethod>]
   member _.TestToString() =
     let data = { BlockNumber = 3; BranchNumber = 2; LineNumber = 127; Taken = 1 }
     Assert.AreEqual("BRF:0\nBRH:0", string BranchCoverage.Default)

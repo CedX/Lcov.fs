@@ -1,13 +1,12 @@
 namespace Belin.Lcov
 
 open Microsoft.VisualStudio.TestTools.UnitTesting
-open System.ComponentModel
 
 /// Tests the features of the `FunctionData` class.
 [<TestClass>]
 type FunctionDataTests() =
 
-  [<TestMethod; DisplayName("ToString")>]
+  [<TestMethod>]
   member _.TestToString() =
     Assert.AreEqual("FN:0,\nFNDA:0,", string FunctionData.Default)
     Assert.AreEqual("FN:127,main\nFNDA:3,main", string { ExecutionCount = 3; FunctionName = "main"; LineNumber = 127 })
@@ -16,7 +15,7 @@ type FunctionDataTests() =
 [<TestClass>]
 type FunctionCoverageTests() =
 
-  [<TestMethod; DisplayName("ToString")>]
+  [<TestMethod>]
   member _.TestToString() =
     let data = { ExecutionCount = 3; FunctionName = "main"; LineNumber = 127 }
     Assert.AreEqual("FNF:0\nFNH:0", string FunctionCoverage.Default)

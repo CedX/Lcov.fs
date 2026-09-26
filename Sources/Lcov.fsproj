@@ -41,5 +41,6 @@
 		<Compile Include="BranchCoverage.fs" />
 		<Compile Include="FunctionCoverage.fs" />
 		<Compile Include="LineCoverage.fs" />
+		<Compile Include="SourceFile.fs" />
 	</ItemGroup>
 </Project>
