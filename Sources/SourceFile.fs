@@ -23,3 +23,14 @@ type SourceFile(path: string) =
     match this.Lines with None -> () | Some value -> output.Add(string value)
     output.Add Tokens.EndOfRecord
     output |> String.concat "\n"
+
+/// Contains operations for working with source files.
+module SourceFile =
+
+  /// Creates a new instance with default coverage values.
+  let withCoverage (path: string) = SourceFile(
+    path,
+    Branches = Some (BranchCoverage()),
+    Functions = Some (FunctionCoverage()),
+    Lines = Some (LineCoverage())
+  )
