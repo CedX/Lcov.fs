@@ -1,24 +1,19 @@
 namespace Belin.Lcov
 
 /// Provides the coverage data of a source file.
-type SourceFile =
-  {
-    /// The branch coverage.
-    Branches: BranchCoverage option
+type SourceFile(path: string) =
 
-    /// The function coverage.
-    Functions: FunctionCoverage option
+  /// The branch coverage.
+  member val Branches: BranchCoverage option = None with get, set
 
-    /// The line coverage.
-    Lines: LineCoverage option
+  /// The function coverage.
+  member val Functions: FunctionCoverage option = None with get, set
 
-    /// The path to the source file.
-    Path: string
-  }
+  /// The line coverage.
+  member val Lines: LineCoverage option = None with get, set
 
-  /// Creates a new instance with default values.
-  static member Default =
-    { Branches = None; Functions = None; Lines = None; Path = "" }
+  /// The path to the source file.
+  member val Path: string = path with get, set
 
   /// Returns a string representation of this object.
   override this.ToString() =

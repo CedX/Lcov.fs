@@ -30,5 +30,6 @@
 		<Compile Include="FunctionCoverage.Tests.fs" />
 		<Compile Include="LineCoverage.Tests.fs" />
 		<Compile Include="SourceFile.Tests.fs" />
+		<!-- <Compile Include="Report.Tests.fs" /> -->
 	</ItemGroup>
 </Project>
