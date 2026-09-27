@@ -33,7 +33,7 @@ type Report(testName: string, ?sourceFiles: SourceFile seq) = // fsharplint:disa
 module Report =
 
   /// The regular expression used to split the lines.
-  let private newLinePattern = Regex(@"\r?\n", RegexOptions.Compiled)
+  let private newLinePattern = Regex @"\r?\n"
 
   /// Parses the specified coverage data in LCOV format.
   let parse (coverage: string): Result<Report, ParseError> =
