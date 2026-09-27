@@ -1,5 +1,7 @@
 namespace Belin.Lcov
 
+open System.Collections.Generic
+
 /// Provides details for line coverage.
 type LineData =
   {
@@ -26,7 +28,7 @@ type LineData =
 type LineCoverage() =
 
   /// The coverage data.
-  member val Data = ResizeArray<LineData>() with get, set
+  member val Data: IList<LineData> = ResizeArray() with get, set
 
   /// The number of lines found.
   member val Found = 0 with get, set
@@ -36,5 +38,5 @@ type LineCoverage() =
 
   /// Returns a string representation of this object.
   override this.ToString() =
-    let data = this.Data |> Seq.map (fun value -> string value) |> List.ofSeq
+    let data = this.Data |> Seq.map string |> List.ofSeq
     data @ [$"{Tokens.LinesFound}:{this.Found}"; $"{Tokens.LinesHit}:{this.Hit}"] |> String.concat "\n"

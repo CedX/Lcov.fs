@@ -1,5 +1,7 @@
 namespace Belin.Lcov
 
+open System.Collections.Generic
+
 /// Provides details for branch coverage.
 type BranchData =
   {
@@ -29,7 +31,7 @@ type BranchData =
 type BranchCoverage() =
 
   /// The coverage data.
-  member val Data = ResizeArray<BranchData>() with get, set
+  member val Data: IList<BranchData> = ResizeArray() with get, set
 
   /// The number of branches found.
   member val Found = 0 with get, set
@@ -39,5 +41,5 @@ type BranchCoverage() =
 
   /// Returns a string representation of this object.
   override this.ToString() =
-    let data = this.Data |> Seq.map (fun value -> string value) |> List.ofSeq
+    let data = this.Data |> Seq.map string |> List.ofSeq
     data @ [$"{Tokens.BranchesFound}:{this.Found}"; $"{Tokens.BranchesHit}:{this.Hit}"] |> String.concat "\n"

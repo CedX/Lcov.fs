@@ -1,5 +1,7 @@
 namespace Belin.Lcov
 
+open System.Collections.Generic
+
 /// Provides details for function coverage.
 type FunctionData =
   {
@@ -25,7 +27,7 @@ type FunctionData =
 type FunctionCoverage() =
 
   /// The coverage data.
-  member val Data = ResizeArray<FunctionData>() with get, set
+  member val Data: IList<FunctionData> = ResizeArray() with get, set
 
   /// The number of functions found.
   member val Found = 0 with get, set
@@ -35,5 +37,5 @@ type FunctionCoverage() =
 
   /// Returns a string representation of this object.
   override this.ToString() =
-    let data = this.Data |> Seq.map (fun value -> string value) |> List.ofSeq
+    let data = this.Data |> Seq.map string |> List.ofSeq
     data @ [$"{Tokens.FunctionsFound}:{this.Found}"; $"{Tokens.FunctionsHit}:{this.Hit}"] |> String.concat "\n"

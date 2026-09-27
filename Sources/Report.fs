@@ -1,13 +1,14 @@
 namespace Belin.Lcov
 
 open System
+open System.Collections.Generic
 open System.Text.RegularExpressions
 
 /// Represents a trace file, that is a coverage report.
 type Report(testName: string, ?sourceFiles: SourceFile seq) =
 
   /// The source file list.
-  member val SourceFiles = ResizeArray<SourceFile>(defaultArg sourceFiles []) with get, set
+  member val SourceFiles: IList<SourceFile> = ResizeArray(defaultArg sourceFiles []) with get, set
 
   /// The test name.
   member val TestName: string = testName with get, set
@@ -15,7 +16,7 @@ type Report(testName: string, ?sourceFiles: SourceFile seq) =
   /// Returns a string representation of this object.
   override this.ToString() =
     let testName = if String.IsNullOrWhiteSpace this.TestName then [] else [$"{Tokens.TestName}:{this.TestName}"]
-    let sourceFiles = this.SourceFiles |> Seq.map (fun value -> string value) |> List.ofSeq
+    let sourceFiles = this.SourceFiles |> Seq.map string |> List.ofSeq
     testName @ sourceFiles |> String.concat "\n"
 
 /// Contains operations for working with LCOV reports.
