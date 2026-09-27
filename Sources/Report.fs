@@ -7,15 +7,15 @@ open System.Text.RegularExpressions
 /// Describes an error that occurs while parsing a LCOV report.
 type ParseError =
   | EmptyCoverage
-  | InvalidBranchData of offset: int
-  | InvalidFunctionData of offset: int
-  | InvalidFunctionName of offset: int
-  | InvalidLineData of offset: int
-  | InvalidToken of offset: int
-  | UnknownToken of offset: int * token: string
+  | InvalidBranchData of line: int
+  | InvalidFunctionData of line: int
+  | InvalidFunctionName of line: int
+  | InvalidLineData of line: int
+  | InvalidToken of line: int
+  | UnknownToken of line: int * token: string
 
 /// Represents a trace file, that is a coverage report.
-type Report(testName: string, ?sourceFiles: SourceFile seq) =
+type Report(testName: string, ?sourceFiles: SourceFile seq) = // fsharplint:disable-line TypePrefixing
 
   /// The source file list.
   member val SourceFiles: IList<SourceFile> = ResizeArray(defaultArg sourceFiles []) with get, set
@@ -81,7 +81,9 @@ module Report =
           | Tokens.FunctionsHit -> sourceFile.Functions.Value.Hit <- int data[0]
           | Tokens.LineData ->
             if data.Length < 2 then error <- Some (InvalidLineData offset)
-            else sourceFile.Lines.Value.Data.Add { Checksum = (if data.Length > 2 then data[2] else ""); ExecutionCount = int data[1]; LineNumber = int data[0] }
+            else
+              let checksum = if data.Length > 2 then data[2] else ""
+              sourceFile.Lines.Value.Data.Add { Checksum = checksum; ExecutionCount = int data[1]; LineNumber = int data[0] }
           | Tokens.LinesFound -> sourceFile.Lines.Value.Found <- int data[0]
           | Tokens.LinesHit -> sourceFile.Lines.Value.Hit <- int data[0]
           | Tokens.SourceFile -> sourceFile <- SourceFile.withCoverage data[0]
