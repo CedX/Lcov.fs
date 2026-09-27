@@ -45,8 +45,13 @@ type ReportTests() =
     Assert.HasCount(9, lines.Data)
     Assert.AreEqual("5kX7OTfHFcjnS98fjeVqNA", lines.Data[0].Checksum)
 
-    match Report.parse "ZZ" with Error _ -> () | Ok _ -> Assert.Fail "It should return an error when the input is invalid."
-    match Report.parse "TN:Example" with Error _ -> () | Ok _ -> Assert.Fail "It should return an error when the report is empty."
+    match Report.parse "ZZ" with
+    | Error (InvalidToken 1) -> ()
+    | _ -> Assert.Fail "It should return an `InvalidToken` error when the input is invalid."
+
+    match Report.parse "TN:Example" with
+    | Error EmptyCoverage -> ()
+    | _ -> Assert.Fail "It should return an `EmptyCoverage` error when the report is empty."
 
   [<TestMethod>]
   member _.TestToString() =
