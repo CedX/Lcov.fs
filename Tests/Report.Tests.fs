@@ -46,7 +46,7 @@ type ReportTests() =
     Assert.AreEqual("5kX7OTfHFcjnS98fjeVqNA", lines.Data[0].Checksum)
 
     match Report.parse "ZZ" with
-    | Error (InvalidToken 1) -> ()
+    | Error (InvalidToken line) -> Assert.AreEqual(1, line)
     | _ -> Assert.Fail "It should return an `InvalidToken` error when the input is invalid."
 
     match Report.parse "TN:Example" with
