@@ -18,9 +18,9 @@ type SourceFile(path: string) =
   /// Returns a string representation of this object.
   override this.ToString() =
     let output = ResizeArray [$"{Tokens.SourceFile}:{this.Path}"]
-    match this.Functions with None -> () | Some value -> output.Add(string value)
-    match this.Branches with None -> () | Some value -> output.Add(string value)
-    match this.Lines with None -> () | Some value -> output.Add(string value)
+    match this.Functions with None -> () | Some functions -> output.Add(string functions)
+    match this.Branches with None -> () | Some branches -> output.Add(string branches)
+    match this.Lines with None -> () | Some lines -> output.Add(string lines)
     output.Add Tokens.EndOfRecord
     output |> String.concat "\n"
 
