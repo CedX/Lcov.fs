@@ -15,7 +15,7 @@ type ParseError =
   | UnknownToken of line: int * token: string
 
 /// Represents a trace file, that is a coverage report.
-type Report(testName: string, ?sourceFiles: SourceFile seq) = // fsharplint:disable-line TypePrefixing
+type Report(testName: string, ?sourceFiles: SourceFile seq) =
 
   /// The source file list.
   member val SourceFiles: IList<SourceFile> = ResizeArray(defaultArg sourceFiles []) with get, set
