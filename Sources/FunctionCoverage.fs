@@ -20,11 +20,11 @@ type FunctionData =
     { ExecutionCount = 0; FunctionName = ""; LineNumber = 0 }
 
   /// Returns a string representation of this object.
-  override this.ToString() =
+  override this.ToString () =
     [$"{Tokens.FunctionName}:{this.LineNumber},{this.FunctionName}"; $"{Tokens.FunctionData}:{this.ExecutionCount},{this.FunctionName}"] |> String.concat "\n"
 
 /// Provides the coverage data of functions.
-type FunctionCoverage() =
+type FunctionCoverage () =
 
   /// The coverage data.
   member val Data: IList<FunctionData> = ResizeArray() with get, set
@@ -36,6 +36,6 @@ type FunctionCoverage() =
   member val Hit = 0 with get, set
 
   /// Returns a string representation of this object.
-  override this.ToString() =
+  override this.ToString () =
     let data = this.Data |> Seq.map string |> List.ofSeq
     data @ [$"{Tokens.FunctionsFound}:{this.Found}"; $"{Tokens.FunctionsHit}:{this.Hit}"] |> String.concat "\n"
