@@ -4,12 +4,12 @@ open Microsoft.VisualStudio.TestTools.UnitTesting
 
 /// Tests the features of the `SourceFile` class.
 [<TestClass>]
-type SourceFileTests () =
+type SourceFileTests() =
 
   [<TestMethod>]
-  member _.TestToString () =
-    Assert.AreEqual ("SF:\nend_of_record", string (SourceFile ""))
+  member _.TestToString() =
+    SourceFile "" |> string |> shouldBe "SF:\nend_of_record"
 
     let path = "/home/CedX/Lcov.fs/program.fs"
     let sourceFile = SourceFile.withCoverage path
-    Assert.AreEqual ($"SF:{path}\n{sourceFile.Functions.Value}\n{sourceFile.Branches.Value}\n{sourceFile.Lines.Value}\nend_of_record", string sourceFile)
+    sourceFile |> string |> shouldBe $"SF:{path}\n{sourceFile.Functions.Value}\n{sourceFile.Branches.Value}\n{sourceFile.Lines.Value}\nend_of_record"

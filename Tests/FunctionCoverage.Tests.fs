@@ -4,19 +4,19 @@ open Microsoft.VisualStudio.TestTools.UnitTesting
 
 /// Tests the features of the `FunctionData` class.
 [<TestClass>]
-type FunctionDataTests () =
+type FunctionDataTests() =
 
   [<TestMethod>]
-  member _.TestToString () =
-    Assert.AreEqual ("FN:0,\nFNDA:0,", string FunctionData.Default)
-    Assert.AreEqual ("FN:127,main\nFNDA:3,main", string { ExecutionCount = 3; FunctionName = "main"; LineNumber = 127 })
+  member _.TestToString() =
+    FunctionData.Default |> string |> shouldBe "FN:0,\nFNDA:0,"
+    { ExecutionCount = 3; FunctionName = "main"; LineNumber = 127 } |> string |> shouldBe "FN:127,main\nFNDA:3,main"
 
 /// Tests the features of the `FunctionCoverage` class.
 [<TestClass>]
-type FunctionCoverageTests () =
+type FunctionCoverageTests() =
 
   [<TestMethod>]
-  member _.TestToString () =
+  member _.TestToString() =
     let data = ResizeArray [{ ExecutionCount = 3; FunctionName = "main"; LineNumber = 127 }]
-    Assert.AreEqual ("FNF:0\nFNH:0", string (FunctionCoverage()))
-    Assert.AreEqual ("FN:127,main\nFNDA:3,main\nFNF:23\nFNH:11", string (FunctionCoverage(Data = data, Found = 23, Hit = 11)))
+    FunctionCoverage() |> string |> shouldBe "FNF:0\nFNH:0"
+    FunctionCoverage(Data = data, Found = 23, Hit = 11) |> string |> shouldBe "FN:127,main\nFNDA:3,main\nFNF:23\nFNH:11"

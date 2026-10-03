@@ -23,12 +23,12 @@ type BranchData =
     { BlockNumber = 0; BranchNumber = 0; LineNumber = 0; Taken = 0 }
 
   /// Returns a string representation of this object.
-  override this.ToString () =
+  override this.ToString() =
     let value = $"{Tokens.BranchData}:{this.LineNumber},{this.BlockNumber},{this.BranchNumber}"
     if this.Taken > 0 then $"{value},{this.Taken}" else $"{value},-"
 
 /// Provides the coverage data of branches.
-type BranchCoverage () =
+type BranchCoverage() =
 
   /// The coverage data.
   member val Data: IList<BranchData> = ResizeArray() with get, set
@@ -40,6 +40,6 @@ type BranchCoverage () =
   member val Hit = 0 with get, set
 
   /// Returns a string representation of this object.
-  override this.ToString () =
+  override this.ToString() =
     let data = this.Data |> Seq.map string |> List.ofSeq
     data @ [$"{Tokens.BranchesFound}:{this.Found}"; $"{Tokens.BranchesHit}:{this.Hit}"] |> String.concat "\n"

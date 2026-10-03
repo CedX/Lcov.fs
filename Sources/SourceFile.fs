@@ -16,7 +16,7 @@ type SourceFile(path: string) =
   member val Path: string = path with get, set
 
   /// Returns a string representation of this object.
-  override this.ToString () =
+  override this.ToString() =
     let output = ResizeArray [$"{Tokens.SourceFile}:{this.Path}"]
     match this.Functions with None -> () | Some functions -> output.Add(string functions)
     match this.Branches with None -> () | Some branches -> output.Add(string branches)

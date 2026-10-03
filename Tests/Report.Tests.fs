@@ -6,47 +6,47 @@ open System.IO
 
 /// Tests the features of the `Report` class.
 [<TestClass>]
-type ReportTests () =
+type ReportTests() =
 
   /// The test fixture.
-  let coverage = File.ReadAllText(Path.Join(AppContext.BaseDirectory, "../Resources/Lcov.info"))
+  let coverage = Path.Join(AppContext.BaseDirectory, "../Resources/Lcov.info") |> File.ReadAllText
 
   [<TestMethod>]
   member _.Parse() =
     let report = match Report.parse coverage with Ok value -> value | Error _ -> failwith "The test report could not be successfully parsed."
 
     // It should have a test name.
-    Assert.AreEqual ("Example", report.TestName)
+    report.TestName |> shouldBe "Example"
 
     // It should contain three source files.
-    Assert.HasCount (3, report.SourceFiles)
-    Assert.AreEqual ("/home/CedX/Lcov.fs/Fixture.fs", report.SourceFiles[0].Path)
-    Assert.AreEqual ("/home/CedX/Lcov.fs/Func1.fs", report.SourceFiles[1].Path)
-    Assert.AreEqual ("/home/CedX/Lcov.fs/Func2.fs", report.SourceFiles[2].Path)
+    report.SourceFiles |> shouldHaveCount 3
+    report.SourceFiles[0].Path |> shouldBe "/home/CedX/Lcov.fs/Fixture.fs"
+    report.SourceFiles[1].Path |> shouldBe "/home/CedX/Lcov.fs/Func1.fs"
+    report.SourceFiles[2].Path |> shouldBe "/home/CedX/Lcov.fs/Func2.fs"
 
     // It should have detailed branch coverage.
     let branches = report.SourceFiles[1].Branches.Value
-    Assert.AreEqual (4, branches.Found)
-    Assert.AreEqual (4, branches.Hit)
-    Assert.HasCount (4, branches.Data)
-    Assert.AreEqual (8, branches.Data[0].LineNumber)
+    branches.Found |> shouldBe 4
+    branches.Hit |> shouldBe 4
+    branches.Data |> shouldHaveCount 4
+    branches.Data[0].LineNumber |> shouldBe 8
 
     // It should have detailed function coverage.
     let functions = report.SourceFiles[1].Functions.Value
-    Assert.AreEqual (1, functions.Found)
-    Assert.AreEqual (1, functions.Hit)
-    Assert.HasCount (1, functions.Data)
-    Assert.AreEqual ("func1", functions.Data[0].FunctionName)
+    functions.Found |> shouldBe 1
+    functions.Hit |> shouldBe 1
+    functions.Data |> shouldHaveCount 1
+    functions.Data[0].FunctionName |> shouldBe "func1"
 
     // It should have detailed line coverage.
     let lines = report.SourceFiles[1].Lines.Value
-    Assert.AreEqual (9, lines.Found)
-    Assert.AreEqual (9, lines.Hit)
-    Assert.HasCount (9, lines.Data)
-    Assert.AreEqual ("5kX7OTfHFcjnS98fjeVqNA", lines.Data[0].Checksum)
+    lines.Found |> shouldBe 9
+    lines.Hit |> shouldBe 9
+    lines.Data |> shouldHaveCount 9
+    lines.Data[0].Checksum |> shouldBe "5kX7OTfHFcjnS98fjeVqNA"
 
     match Report.parse "ZZ" with
-    | Error (InvalidToken line) -> Assert.AreEqual (1, line)
+    | Error (InvalidToken line) -> line |> shouldBe 1
     | _ -> Assert.Fail "It should return an `InvalidToken` error when the input is invalid."
 
     match Report.parse "TN:Example" with
@@ -54,7 +54,7 @@ type ReportTests () =
     | _ -> Assert.Fail "It should return an `EmptyCoverage` error when the report is empty."
 
   [<TestMethod>]
-  member _.TestToString () =
+  member _.TestToString() =
     let sourceFile = SourceFile.withCoverage ""
-    Assert.AreEqual ("", string (Report ""))
-    Assert.AreEqual ($"TN:LcovTest\n{sourceFile}", string (Report("LcovTest", [sourceFile])))
+    Report "" |> string |> shouldBeEmptyString
+    Report("LcovTest", [sourceFile]) |> string |> shouldBe $"TN:LcovTest\n{sourceFile}"

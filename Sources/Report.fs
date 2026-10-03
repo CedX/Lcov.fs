@@ -15,7 +15,7 @@ type ParseError =
   | UnknownToken of line: int * token: string
 
 /// Represents a trace file, that is a coverage report.
-type Report (testName: string, ?sourceFiles: SourceFile seq) =
+type Report(testName: string, ?sourceFiles: SourceFile seq) =
 
   /// The source file list.
   member val SourceFiles: IList<SourceFile> = ResizeArray(defaultArg sourceFiles []) with get, set
@@ -24,7 +24,7 @@ type Report (testName: string, ?sourceFiles: SourceFile seq) =
   member val TestName: string = testName with get, set
 
   /// Returns a string representation of this object.
-  override this.ToString () =
+  override this.ToString() =
     let testName = if String.IsNullOrWhiteSpace this.TestName then [] else [$"{Tokens.TestName}:{this.TestName}"]
     let sourceFiles = this.SourceFiles |> Seq.map string |> List.ofSeq
     testName @ sourceFiles |> String.concat "\n"
