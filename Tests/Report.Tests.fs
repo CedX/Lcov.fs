@@ -19,7 +19,7 @@ type ReportTests() =
     report.TestName |> shouldBe "Example"
 
     // It should contain three source files.
-    report.SourceFiles |> shouldHaveCount 3
+    report.SourceFiles.Count |> shouldBe 3
     report.SourceFiles[0].Path |> shouldBe "/home/CedX/Lcov.fs/Fixture.fs"
     report.SourceFiles[1].Path |> shouldBe "/home/CedX/Lcov.fs/Func1.fs"
     report.SourceFiles[2].Path |> shouldBe "/home/CedX/Lcov.fs/Func2.fs"
@@ -28,21 +28,21 @@ type ReportTests() =
     let branches = report.SourceFiles[1].Branches.Value
     branches.Found |> shouldBe 4
     branches.Hit |> shouldBe 4
-    branches.Data |> shouldHaveCount 4
+    branches.Data.Count |> shouldBe 4
     branches.Data[0].LineNumber |> shouldBe 8
 
     // It should have detailed function coverage.
     let functions = report.SourceFiles[1].Functions.Value
     functions.Found |> shouldBe 1
     functions.Hit |> shouldBe 1
-    functions.Data |> shouldHaveCount 1
+    functions.Data.Count |> shouldBe 1
     functions.Data[0].FunctionName |> shouldBe "func1"
 
     // It should have detailed line coverage.
     let lines = report.SourceFiles[1].Lines.Value
     lines.Found |> shouldBe 9
     lines.Hit |> shouldBe 9
-    lines.Data |> shouldHaveCount 9
+    lines.Data.Count |> shouldBe 9
     lines.Data[0].Checksum |> shouldBe "5kX7OTfHFcjnS98fjeVqNA"
 
     match Report.parse "ZZ" with
