@@ -31,6 +31,10 @@ module Should =
   let inline beOfType (expectedType: Type) (value: objnull) =
     Assert.IsExactInstanceOfType(value, expectedType)
 
+  /// Tests whether the specified value is contained in the given sequence.
+  let inline beOfOne (sequence: 'T seq) (value: objnull) =
+    Assert.Contains(value, sequence)
+
   /// Tests whether two sequences contain equal elements in the same order.
   let inline beSequence (expected: 'T seq) (actual: 'T seq) =
     Assert.AreSequenceEqual(expected, actual)
