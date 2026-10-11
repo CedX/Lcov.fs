@@ -1,7 +1,6 @@
 namespace Belin.Lcov
 
 open Microsoft.VisualStudio.TestTools.UnitTesting
-open System
 
 /// Contains assertions for working with unit tests.
 [<RequireQualifiedAccess>]
@@ -12,8 +11,8 @@ module Should =
     Assert.AreEqual<'T>(expected, actual)
 
   /// Tests whether the specified object is an instance of the expected type.
-  let inline beAssignableTo (expectedType: Type) (value: objnull) =
-    Assert.IsInstanceOfType(value, expectedType)
+  let inline beAssignableTo<'T> (value: objnull) =
+    Assert.IsInstanceOfType<'T> value
 
   /// Tests whether the specified sequence is empty.
   let inline beEmpty (sequence: 'T seq) =
@@ -28,8 +27,8 @@ module Should =
     Assert.IsNull value
 
   /// Tests whether the specified object is exactly an instance of the expected type.
-  let inline beOfType (expectedType: Type) (value: objnull) =
-    Assert.IsExactInstanceOfType(value, expectedType)
+  let inline beOfType<'T> (value: objnull) =
+    Assert.IsExactInstanceOfType<'T> value
 
   /// Tests whether the specified value is contained in the given sequence.
   let inline beOfOne (sequence: 'T seq) (value: objnull) =
