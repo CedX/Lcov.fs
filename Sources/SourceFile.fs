@@ -28,6 +28,7 @@ type SourceFile(path: string) =
 module SourceFile =
 
   /// Creates a new instance with default coverage values.
+  [<CompiledName("WithCoverage")>]
   let withCoverage (path: string) = SourceFile(
     path,
     Branches = Some (BranchCoverage()),

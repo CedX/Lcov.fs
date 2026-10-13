@@ -36,6 +36,7 @@ module Report =
   let private newLinePattern = Regex @"\r?\n"
 
   /// Parses the specified coverage data in LCOV format.
+  [<CompiledName("Parse")>]
   let parse (coverage: string): Result<Report, ParseError> =
     let report = Report ""
     let mutable sourceFile = SourceFile.withCoverage ""
