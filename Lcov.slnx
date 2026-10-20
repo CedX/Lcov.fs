@@ -1,4 +1,4 @@
-<Solution ProjectVersion="2026.10.0">
+<Solution ProjectVersion="2026.11.0">
 	<Project Path="Sources/Lcov.fsproj" />
 	<Project Path="Tests/Lcov.Tests.fsproj">
 		<Build Solution="Release|*" Project="false" />
