@@ -1,7 +1,5 @@
 namespace Belin.Lcov
 
-open System.Collections.Generic
-
 /// Provides details for branch coverage.
 type BranchData =
   {
@@ -31,7 +29,7 @@ type BranchData =
 type BranchCoverage() =
 
   /// The coverage data.
-  member val Data: IList<BranchData> = ResizeArray() with get, set
+  member val Data = ResizeArray<BranchData>() with get, set
 
   /// The number of branches found.
   member val Found = 0 with get, set

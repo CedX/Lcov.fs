@@ -1,7 +1,5 @@
 namespace Belin.Lcov
 
-open System.Collections.Generic
-
 /// Provides details for line coverage.
 type LineData =
   {
@@ -28,7 +26,7 @@ type LineData =
 type LineCoverage() =
 
   /// The coverage data.
-  member val Data: IList<LineData> = ResizeArray() with get, set
+  member val Data = ResizeArray<LineData>() with get, set
 
   /// The number of lines found.
   member val Found = 0 with get, set

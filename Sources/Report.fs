@@ -1,7 +1,6 @@
 namespace Belin.Lcov
 
 open System
-open System.Collections.Generic
 open System.Text.RegularExpressions
 
 /// Describes an error that occurs while parsing a LCOV report.
@@ -18,7 +17,7 @@ type ParseError =
 type Report(testName: string, ?sourceFiles: SourceFile seq) =
 
   /// The source file list.
-  member val SourceFiles: IList<SourceFile> = ResizeArray(defaultArg sourceFiles []) with get, set
+  member val SourceFiles = ResizeArray<SourceFile>(defaultArg sourceFiles []) with get, set
 
   /// The test name.
   member val TestName: string = testName with get, set

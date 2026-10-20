@@ -1,7 +1,5 @@
 namespace Belin.Lcov
 
-open System.Collections.Generic
-
 /// Provides details for function coverage.
 type FunctionData =
   {
@@ -27,7 +25,7 @@ type FunctionData =
 type FunctionCoverage() =
 
   /// The coverage data.
-  member val Data: IList<FunctionData> = ResizeArray() with get, set
+  member val Data = ResizeArray<FunctionData>() with get, set
 
   /// The number of functions found.
   member val Found = 0 with get, set
