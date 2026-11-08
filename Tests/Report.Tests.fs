@@ -1,5 +1,6 @@
 namespace Belin.Lcov
 
+open Belin.Should
 open Microsoft.VisualStudio.TestTools.UnitTesting
 open System
 open System.IO
