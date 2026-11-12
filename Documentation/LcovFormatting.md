@@ -14,7 +14,7 @@ let lines = LineCoverage(Found = 2, Hit = 2, Data = ResizeArray [
 
 let sourceFile = SourceFile("/home/CedX/Lcov.fs/Fixture.fs", Functions = Some functions, Lines = Some lines)
 let report = Report("Example", [sourceFile])
-printfn "%O" report
+printn report
 ```
 
 The `Report.ToString()` method will return a [LCOV](https://github.com/linux-test-project/lcov) report formatted like this:

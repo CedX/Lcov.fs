@@ -9,5 +9,5 @@ match result with
 | Error parseError ->
   eprintfn "%A" parseError
 | Ok report ->
-  printfn "The coverage report contains %d source files:" report.SourceFiles.Count
-  printfn "%s" (JsonSerializer.Serialize(report, JsonSerializerOptions(WriteIndented = true)))
+  printn $"The coverage report contains {report.SourceFiles.Count} source files:"
+  printn (JsonSerializer.Serialize(report, JsonSerializerOptions(WriteIndented = true)))
